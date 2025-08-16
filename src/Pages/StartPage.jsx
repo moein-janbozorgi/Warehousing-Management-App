@@ -5,7 +5,7 @@ function StartPage() {
   return (
     <div className={styles.container}>
       <img src="/images/Thumbnail.png" alt="" />
-      <Link to="/Login">شروع</Link>
+      <Link to="/signup">شروع</Link>
     </div>
   );
 }
