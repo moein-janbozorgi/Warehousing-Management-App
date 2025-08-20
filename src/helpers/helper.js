@@ -1,5 +1,10 @@
 import * as Yup from "yup";
 
+const getToken = () => {
+  return localStorage.getItem("token") || null;
+};
+
+
 const signInValidate = Yup.object().shape({
   username: Yup.string()
     .min(3, "نام کاربری حداقل باید ۳ کاراکتر باشد")
@@ -22,4 +27,4 @@ const loginValidate = Yup.object().shape({
     .min(6, "رمز عبور حداقل باید ۶ کاراکتر باشد"),
 });
 
-export { signInValidate, loginValidate };
+export { signInValidate, loginValidate, getToken, };
