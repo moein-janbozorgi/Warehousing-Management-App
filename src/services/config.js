@@ -23,8 +23,8 @@ const loginUser = async (data) => {
   return await api.post("/auth/login", data);
 };
 
-const getData = async () => {
-  return await api.get("/products?page=1&limit=10");
+const getData = async ({ page = 1, limit = 10 }) => {
+  return await api.get(`/products?page=${page}&limit=${limit}`);
 };
 
 const addProduct = async (data) => {

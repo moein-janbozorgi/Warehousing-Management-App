@@ -3,18 +3,18 @@ import styles from "./DeleteModal.module.css";
 import { deleteProduct } from "../services/config";
 import { toast } from "react-toastify";
 
-function DeleteModal({ product, setDeleteModal }) {
+function DeleteModal({ product, setDeleteModal, page, setPage }) {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation({
     mutationFn: (id) => deleteProduct(id),
     onSuccess: (_, id) => {
-      queryClient.setQueryData(["products"], (oldData) => {
+      queryClient.setQueryData(["products", page], (oldData) => {
         if (!oldData) return oldData;
-        return {
-          ...oldData,
-          data: oldData.data.filter((p) => p.id !== id),
-        };
+        const newData = oldData.data.filter((p) => p.id !== id);
+        if (newData.length === 0 && page > 1) {
+          setPage(page => page - 1);
+        }
       });
       setDeleteModal(null);
       toast.success("کالا با موفقیت حذف شد", { autoClose: 3000 });

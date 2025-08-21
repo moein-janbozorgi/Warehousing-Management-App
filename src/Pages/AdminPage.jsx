@@ -7,15 +7,18 @@ import { useState } from "react";
 import AddModal from "../components/AddModal";
 import Editmodal from "../components/Editmodal";
 import DeleteModal from "../components/DeleteModal";
+import Paginate from "../components/Paginate";
 
 function AdminPage() {
   const [addModal, setAddModal] = useState(false);
   const [editModal, setEditModal] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
+  const [page, setPage] = useState(1);
 
   const { data } = useQuery({
-    queryFn: getData,
-    queryKey: ["products"],
+    queryFn: () => getData({ page, limit: 10 }),
+    queryKey: ["products", page],
+    keepPreviousData: true,
     refetchOnWindowFocus: false,
     refetchInterval: false,
   });
@@ -51,12 +54,13 @@ function AdminPage() {
           ))}
         </tbody>
       </table>
+      <Paginate page={page} setPage={setPage} />
       {addModal ? <AddModal setAddModal={setAddModal} /> : null}
       {editModal ? (
         <Editmodal setEditModal={setEditModal} product={editModal} />
       ) : null}
       {deleteModal ? (
-        <DeleteModal setDeleteModal={setDeleteModal} product={deleteModal} />
+        <DeleteModal setDeleteModal={setDeleteModal} product={deleteModal} page={page} setPage={setPage}/>
       ) : null}
     </>
   );
