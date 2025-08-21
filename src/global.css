@@ -13,9 +13,8 @@
       format("svg");
 }
 
-
 body {
-  margin: auto;
+  margin: 10px auto;
   max-width: 1200px;
   padding: 10px;
   min-height: 100vh;

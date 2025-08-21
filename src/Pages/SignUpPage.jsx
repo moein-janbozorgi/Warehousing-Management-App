@@ -44,7 +44,7 @@ function SignUpPage() {
     <div className={styles.container}>
       <h1>بوت‌کمپ‌بوتواستارت</h1>
       <div className={styles.form}>
-        <img src="/images/Union.png" alt="botostart-logo" />
+        <img src="./src/assets/Union.png" alt="botostart-logo" />
         <h2>فرم ثبت نام</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input

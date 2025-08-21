@@ -4,7 +4,6 @@ const getToken = () => {
   return localStorage.getItem("token") || null;
 };
 
-
 const signInValidate = Yup.object().shape({
   username: Yup.string()
     .min(3, "نام کاربری حداقل باید ۳ کاراکتر باشد")
@@ -27,4 +26,13 @@ const loginValidate = Yup.object().shape({
     .min(6, "رمز عبور حداقل باید ۶ کاراکتر باشد"),
 });
 
-export { signInValidate, loginValidate, getToken, };
+const toPersianNumber = (num) => {
+  const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
+  return num
+    .toString()
+    .split("")
+    .map((c) => persianDigits[c] || c)
+    .join("");
+};
+
+export { signInValidate, loginValidate, getToken, toPersianNumber };
