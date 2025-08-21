@@ -13,16 +13,17 @@ function DeleteModal({ product, setDeleteModal, page, setPage }) {
         if (!oldData) return oldData;
         const newData = oldData.data.filter((p) => p.id !== id);
         if (newData.length === 0 && page > 1) {
-          setPage(page => page - 1);
+          setPage((page) => page - 1);
         }
+        return { ...oldData, data: newData };
       });
       setDeleteModal(null);
       toast.success("کالا با موفقیت حذف شد", { autoClose: 3000 });
     },
   });
 
-  const deleteHandler = (id) => {
-    mutate(id);
+  const deleteHandler = () => {
+    mutate(product);
   };
 
   return (
@@ -31,7 +32,7 @@ function DeleteModal({ product, setDeleteModal, page, setPage }) {
         <img src="./src/assets/Close.png" alt="delete image" />
         <p>آیا از حذف این محصول مطمئنید؟</p>
         <div className={styles.actions}>
-          <button onClick={() => deleteHandler(product)}>حذف</button>
+          <button onClick={deleteHandler}>حذف</button>
           <button onClick={() => setDeleteModal(null)}>لغو</button>
         </div>
       </div>

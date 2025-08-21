@@ -3,7 +3,7 @@ import SearchBox from "../components/SearchBox";
 import styles from "./AdminPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { filteredData, getData } from "../services/config";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddModal from "../components/AddModal";
 import Editmodal from "../components/Editmodal";
 import DeleteModal from "../components/DeleteModal";
