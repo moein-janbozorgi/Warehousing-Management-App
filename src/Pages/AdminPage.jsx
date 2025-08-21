@@ -8,6 +8,8 @@ import AddModal from "../components/AddModal";
 import Editmodal from "../components/Editmodal";
 import DeleteModal from "../components/DeleteModal";
 import Paginate from "../components/Paginate";
+import { FadeLoader } from "react-spinners";
+import Loader from "../components/Loader";
 
 function AdminPage() {
   const [addModal, setAddModal] = useState(false);
@@ -15,13 +17,15 @@ function AdminPage() {
   const [deleteModal, setDeleteModal] = useState(null);
   const [page, setPage] = useState(1);
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: () => getData({ page, limit: 10 }),
     queryKey: ["products", page],
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     refetchInterval: false,
   });
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
@@ -60,7 +64,12 @@ function AdminPage() {
         <Editmodal setEditModal={setEditModal} product={editModal} />
       ) : null}
       {deleteModal ? (
-        <DeleteModal setDeleteModal={setDeleteModal} product={deleteModal} page={page} setPage={setPage}/>
+        <DeleteModal
+          setDeleteModal={setDeleteModal}
+          product={deleteModal}
+          page={page}
+          setPage={setPage}
+        />
       ) : null}
     </>
   );
