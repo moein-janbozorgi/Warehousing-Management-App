@@ -4,12 +4,16 @@ import styles from "./AdminPage.module.css";
 import { useQuery } from "@tanstack/react-query";
 import { getData } from "../services/config";
 import { useState } from "react";
-import { set } from "react-hook-form";
+import AddModal from "../components/AddModal";
+import Editmodal from "../components/Editmodal";
+import DeleteModal from "../components/DeleteModal";
 
 function AdminPage() {
-  const [addModal, setAddmodal] = useState(false);
+  const [addModal, setAddModal] = useState(false);
+  const [editModal, setEditModal] = useState(null);
+  const [deleteModal, setDeleteModal] = useState(null);
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryFn: getData,
     queryKey: ["products"],
     refetchOnWindowFocus: false,
@@ -24,7 +28,7 @@ function AdminPage() {
           <img src="./src/assets/setting.png" />
           <p>مدیریت کالا</p>
         </div>
-        <button onClick={() => setAddmodal((s) => !s)}>افزودن محصول</button>
+        <button onClick={() => setAddModal((s) => !s)}>افزودن محصول</button>
       </div>
       <table className={styles.table}>
         <thead>
@@ -38,11 +42,22 @@ function AdminPage() {
         </thead>
         <tbody>
           {data?.data.map((product) => (
-            <Product key={product.id} product={product} />
+            <Product
+              key={product.id}
+              product={product}
+              setEditModal={setEditModal}
+              setDeleteModal={setDeleteModal}
+            />
           ))}
         </tbody>
       </table>
-      {/* {addModal ? <} */}
+      {addModal ? <AddModal setAddModal={setAddModal} /> : null}
+      {editModal ? (
+        <Editmodal setEditModal={setEditModal} product={editModal} />
+      ) : null}
+      {deleteModal ? (
+        <DeleteModal setDeleteModal={setDeleteModal} product={deleteModal} />
+      ) : null}
     </>
   );
 }

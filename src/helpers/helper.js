@@ -1,9 +1,5 @@
 import * as Yup from "yup";
 
-const getToken = () => {
-  return localStorage.getItem("token") || null;
-};
-
 const signInValidate = Yup.object().shape({
   username: Yup.string()
     .min(3, "نام کاربری حداقل باید ۳ کاراکتر باشد")
@@ -26,6 +22,18 @@ const loginValidate = Yup.object().shape({
     .min(6, "رمز عبور حداقل باید ۶ کاراکتر باشد"),
 });
 
+const modalValidate = Yup.object().shape({
+  name: Yup.string()
+    .max(15, "نام محصول باید حداکثر 15 کلمه باشد")
+    .required(" نام محصول را وارد کنید "),
+  quantity: Yup.number()
+    .typeError("تعداد را وارد کنید")
+    .max(1000000, "حداکثر تعداد یک کالا 1 میلیون می‌باشد"),
+  price: Yup.number()
+    .typeError("قیمت را وارد کنید")
+    .max(30000000, "حداکثر قیمت یک کالا 30 میلیارد می‌باشد"),
+});
+
 const toPersianNumber = (num) => {
   const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   return num
@@ -35,4 +43,4 @@ const toPersianNumber = (num) => {
     .join("");
 };
 
-export { signInValidate, loginValidate, getToken, toPersianNumber };
+export { signInValidate, loginValidate, toPersianNumber, modalValidate };

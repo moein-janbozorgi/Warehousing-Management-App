@@ -1,12 +1,12 @@
 import { useForm } from "react-hook-form";
 import { modalValidate } from "../helpers/helper";
-import styles from "./AddModal.module.css";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addProduct } from "../services/config";
 import { toast } from "react-toastify";
+import styles from "./Editmodal.module.css";
+import { editProduct } from "../services/config";
 
-function AddModal({ setAddModal }) {
+function Editmodal({ setEditModal, product }) {
   const queryClient = useQueryClient();
 
   const {
@@ -15,27 +15,31 @@ function AddModal({ setAddModal }) {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(modalValidate),
+    defaultValues: {
+      name: product?.name,
+      price: product?.price,
+      quantity: product?.quantity,
+    },
   });
 
   const { mutate } = useMutation({
-    mutationFn: (payload) => addProduct(payload),
+    mutationFn: (payload) => editProduct(payload),
     onSuccess: () => {
-      setAddModal((s) => !s);
       queryClient.invalidateQueries({ queryKey: ["products"] });
-      toast.success("کالا با موفقیت اضافه شد", {
+      setEditModal(null);
+      toast.success("کالا با موفقیت تغییر داده شد", {
         autoClose: 3000,
       });
     },
     onError: () => {
-      toast.error("کالا اضافه نشد دوباره امتحان کنید");
+      toast.error("کالا تغییر داده نشد دوباره امتحان کنید");
     },
   });
 
   const onSubmit = (data) => {
     const payload = {
-      name: data.name,
-      price: data.price,
-      quantity: data.quantity,
+      id: product.id,
+      ...data,
     };
     mutate(payload);
   };
@@ -44,7 +48,6 @@ function AddModal({ setAddModal }) {
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <h2 className={styles.title}>ایجاد محصول جدید</h2>
-
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.forms}>
             <label>نام کالا</label>
@@ -69,12 +72,12 @@ function AddModal({ setAddModal }) {
 
           <div className={styles.actions}>
             <button type="submit" className={styles.addBtn}>
-              ایجاد
+              ثبت اطلاعات جدید
             </button>
             <button
               type="button"
               className={styles.cancelBtn}
-              onClick={() => setAddModal((s) => !s)}
+              onClick={() => setEditModal(null)}
             >
               انصراف
             </button>
@@ -85,4 +88,4 @@ function AddModal({ setAddModal }) {
   );
 }
 
-export default AddModal;
+export default Editmodal;

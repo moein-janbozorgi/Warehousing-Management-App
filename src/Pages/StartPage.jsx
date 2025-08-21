@@ -4,7 +4,7 @@ import styles from "./StartPage.module.css";
 function StartPage() {
   return (
     <div className={styles.container}>
-      <img src="images/Thumbnail.png" alt="" />
+      <img src="./src/assets/Thumbnail.png" />
       <Link to="/signup">شروع</Link>
     </div>
   );
