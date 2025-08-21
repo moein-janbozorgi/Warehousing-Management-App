@@ -50,14 +50,31 @@ function AdminPage() {
           </tr>
         </thead>
         <tbody>
-          {filterData.map((product) => (
-            <Product
-              key={product.id}
-              product={product}
-              setEditModal={setEditModal}
-              setDeleteModal={setDeleteModal}
-            />
-          ))}
+          {filterData && filterData.length > 0 ? (
+            filterData.map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                setEditModal={setEditModal}
+                setDeleteModal={setDeleteModal}
+              />
+            ))
+          ) : (
+            <tr>
+              <td
+                colSpan={5}
+                style={{
+                  textAlign: "center",
+                  fontSize: "14px",
+                  fontWeight: "400",
+                  fontFamily: "Vazirmatn",
+                  color: "#282828",
+                }}
+              >
+                داده‌ای وجود ندارد
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <Paginate page={page} setPage={setPage} />
