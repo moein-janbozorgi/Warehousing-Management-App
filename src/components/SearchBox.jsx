@@ -1,12 +1,18 @@
 import { LuSearch } from "react-icons/lu";
 import styles from "./Searchbox.module.css";
 
-function SearchBox() {
+
+function SearchBox({ name, setName }) {
   return (
     <div className={styles.container}>
       <div className={styles.searchBox}>
         <LuSearch className={styles.searchIcon} />
-        <input type="text" placeholder="جستجو کالا" />
+        <input
+          type="text"
+          placeholder="جستجو کالا"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div className={styles.leftSide}>
         <div className={styles.border}></div>

@@ -2,6 +2,8 @@ import axios from "axios";
 
 const api = axios.create({ baseURL: "http://localhost:3000" });
 
+let controller;
+
 api.interceptors.response.use(
   (response) => response.data,
   (error) => Promise.reject(error)
@@ -23,8 +25,14 @@ const loginUser = async (data) => {
   return await api.post("/auth/login", data);
 };
 
-const getData = async ({ page = 1, limit = 10 }) => {
-  return await api.get(`/products?page=${page}&limit=${limit}`);
+const getData = async ({ page = 1, limit = 10, name }) => {
+  if (controller) controller.abort();
+  controller = new AbortController();
+
+  return await api.get(
+    `/products?page=${page}&limit=${limit}${name ? `&name=${name}` : ""}`,
+    { signal: controller.signal }
+  );
 };
 
 const addProduct = async (data) => {
@@ -39,6 +47,13 @@ const deleteProduct = async (id) => {
   return await api.delete(`/products/${id}`);
 };
 
+const filteredData = (name, data) =>
+  name
+    ? data?.data.filter((product) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+      )
+    : data?.data;
+
 export default api;
 export {
   registerUser,
@@ -47,4 +62,5 @@ export {
   addProduct,
   editProduct,
   deleteProduct,
+  filteredData
 };

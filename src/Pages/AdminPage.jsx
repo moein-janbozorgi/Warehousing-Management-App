@@ -2,13 +2,12 @@ import Product from "../components/Product";
 import SearchBox from "../components/SearchBox";
 import styles from "./AdminPage.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { getData } from "../services/config";
-import { useState } from "react";
+import { filteredData, getData } from "../services/config";
+import { useEffect, useState } from "react";
 import AddModal from "../components/AddModal";
 import Editmodal from "../components/Editmodal";
 import DeleteModal from "../components/DeleteModal";
 import Paginate from "../components/Paginate";
-import { FadeLoader } from "react-spinners";
 import Loader from "../components/Loader";
 
 function AdminPage() {
@@ -16,6 +15,7 @@ function AdminPage() {
   const [editModal, setEditModal] = useState(null);
   const [deleteModal, setDeleteModal] = useState(null);
   const [page, setPage] = useState(1);
+  const [name, setName] = useState("");
 
   const { data, isLoading } = useQuery({
     queryFn: () => getData({ page, limit: 10 }),
@@ -25,11 +25,13 @@ function AdminPage() {
     refetchInterval: false,
   });
 
+  const filterData = filteredData(name, data);
+
   if (isLoading) return <Loader />;
 
   return (
     <>
-      <SearchBox />
+      <SearchBox name={name} setName={setName} />
       <div className={styles.container}>
         <div>
           <img src="./src/assets/setting.png" />
@@ -48,7 +50,7 @@ function AdminPage() {
           </tr>
         </thead>
         <tbody>
-          {data?.data.map((product) => (
+          {filterData.map((product) => (
             <Product
               key={product.id}
               product={product}
