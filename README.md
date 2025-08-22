@@ -42,7 +42,7 @@ src/
 
 1. کلون کردن پروژه:
    ```bash
-   git clone https://github.com/moein-janbozorgi/Warehouse-Management-App.git
+   git clone https://github.com/moein-janbozorgi/Warehousing-Management-App.git
    cd warehouse-management-app
   
 2. npm install
