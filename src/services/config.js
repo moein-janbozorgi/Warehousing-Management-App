@@ -47,12 +47,6 @@ const deleteProduct = async (id) => {
   return await api.delete(`/products/${id}`);
 };
 
-const filteredData = (name, data) =>
-  name
-    ? data?.data.filter((product) =>
-        product.name.toLowerCase().includes(name.toLowerCase())
-      )
-    : data?.data;
 
 export default api;
 export {
@@ -62,5 +56,4 @@ export {
   addProduct,
   editProduct,
   deleteProduct,
-  filteredData
 };

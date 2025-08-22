@@ -1,12 +1,70 @@
-# React + Vite
+# 🛍️ پروژه انبار داری 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+این پروژه بخش **فرانت‌اند** سیستم مدیریت محصولات است که برای مدیریت کالاها، کاربران و عملیات انبار طراحی شده.  
+فرانت‌اند با رابط کاربری مدرن و ریسپانسیو ساخته شده تا تجربه کاربری روان و جذابی ارائه دهد.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 قابلیت‌ها
+- 🔍 نمایش لیست محصولات به همراه جزییات  
+- ➕ افزودن، ویرایش و حذف محصولات  
+- 👤 مدیریت کاربران (ورود/ثبت‌نام)  
+- 📊 داشبورد مدیریتی با گزارش‌ها و نمودارها  
+- 🌐 ارتباط مستقیم با بک‌اند از طریق API  
+- 🎨 استفاده از آیکون‌ها و طراحی مدرن (Iconly)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ تکنولوژی‌های استفاده‌شده
+- **React.js**    (برای ساخت رابط کاربری)  
+- **Axios / Fetch API** (برای ارتباط با بک‌اند)  
+- **React Router** (برای مدیریت مسیرها)  
+- **React icon** (برای آیکون‌های زیبا)  
+-   **Yup**      (برای اعتبار سنجی پروژه)
+-  **React hook form**  (ترکیب با yup برای فرم بندی بهتر)
+- **toast**      (برای نشان دادن اعلان های شکست و موفقیت)
+---
+
+## 📂  ساختار پوشه‌ها (نمونه)
+
+src/
+ ┣ components/       # کامپوننت‌های قابل استفاده مجدد
+ ┣ pages/            # صفحات اصلی برنامه
+ ┣ assets/           # تصاویر و آیکون‌ها
+ ┣ services/         # درخواست‌های API
+ ┣ styles/           # استایل‌ها
+ ┗ App.js            # فایل اصلی پروژه
+
+
+## ⚙️ نحوه اجرا
+
+اجرای فرانت‌اند:
+
+1. کلون کردن پروژه:
+   ```bash
+   git clone https://github.com/moein-janbozorgi/Warehouse-Management-App.git
+   cd warehouse-management-app
+  
+2. npm install
+
+3. npm run dev اجرای برنامه
+
+اجرای بک اند:
+
+1. فایل warehouse-api را باز کرده  و دستور 
+npm start را درون ترمینال وارد کنید
+
+## 🖼️ پیش‌نمایش پروژه
+
+## صفحه ورود
+
+(https://i.imgur.com/SuZko0s.png)
+
+## داشبورد مدیریت
+
+(https://i.imgur.com/lvrkjdi.png)
+
+## اطلاعات تماس
+
+ایمیل : moeinjanb84@gmail.com
+

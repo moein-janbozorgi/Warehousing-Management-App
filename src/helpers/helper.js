@@ -34,6 +34,14 @@ const modalValidate = Yup.object().shape({
     .max(30000000, "حداکثر قیمت یک کالا 30 میلیارد می‌باشد"),
 });
 
+const filteredData = (name, data) =>
+  name
+    ? data?.data.filter((product) =>
+        product.name.toLowerCase().includes(name.toLowerCase())
+      )
+    : data?.data;
+
+
 const toPersianNumber = (num) => {
   const persianDigits = ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
   return num
@@ -43,4 +51,4 @@ const toPersianNumber = (num) => {
     .join("");
 };
 
-export { signInValidate, loginValidate, toPersianNumber, modalValidate };
+export { signInValidate, loginValidate, toPersianNumber, modalValidate, filteredData};

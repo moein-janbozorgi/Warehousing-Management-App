@@ -2,13 +2,14 @@ import Product from "../components/Product";
 import SearchBox from "../components/SearchBox";
 import styles from "./AdminPage.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { filteredData, getData } from "../services/config";
+import { getData } from "../services/config";
 import { useState } from "react";
 import AddModal from "../components/AddModal";
 import Editmodal from "../components/Editmodal";
 import DeleteModal from "../components/DeleteModal";
 import Paginate from "../components/Paginate";
 import Loader from "../components/Loader";
+import { filteredData } from "../helpers/helper";
 
 function AdminPage() {
   const [addModal, setAddModal] = useState(false);
