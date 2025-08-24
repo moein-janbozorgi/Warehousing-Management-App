@@ -1,6 +1,12 @@
 import axios from "axios";
+import { getCookie } from "../utils/cookie";
 
-const api = axios.create({ baseURL: "http://localhost:3000" });
+const api = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 let controller;
 
@@ -10,7 +16,7 @@ api.interceptors.response.use(
 );
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token");
+  const token = getCookie("token");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -46,7 +52,6 @@ const editProduct = async ({ id, ...data }) => {
 const deleteProduct = async (id) => {
   return await api.delete(`/products/${id}`);
 };
-
 
 export default api;
 export {

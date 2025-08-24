@@ -1,26 +1,13 @@
-import { Navigate, Route, Routes } from "react-router-dom";
-import StartPage from "./Pages/StartPage";
-import SignUpPage from "./Pages/SignUpPage";
-import LoginPage from "./Pages/LoginPage";
-import AdminPage from "./Pages/AdminPage";
-import ProtectedRoute from "./Protected/ProtectedRoute";
+import { ToastContainer } from "react-toastify";
+import TanstackQueryProvider from "./Providers/TanstackQueryProvider";
+import Router from "./router/Router";
 
 function App() {
   return (
-    <Routes>
-      <Route index element={<Navigate to={"/start"} replace />} />
-      <Route path="/start" element={<StartPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <AdminPage />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+    <TanstackQueryProvider>
+      <Router />
+      <ToastContainer position="top-center" />
+    </TanstackQueryProvider>
   );
 }
 

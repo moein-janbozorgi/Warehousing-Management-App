@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { loginUser } from "../services/config";
+import { setCookie } from "../utils/cookie";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -21,8 +22,7 @@ function LoginPage() {
   const { mutate } = useMutation({
     mutationFn: (payload) => loginUser(payload),
     onSuccess: (data) => {
-      localStorage.setItem("token", data.token);
-
+      setCookie("token", data.token);
       toast.success("ورود موفق", {
         autoClose: 3000,
         onClose: () => navigate("/dashboard"),
